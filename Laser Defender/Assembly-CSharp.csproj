@@ -46,8 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
+     <Compile Include="Assets\Scripts\Position.cs" />
      <Compile Include="Assets\Scripts\SpaceShipController.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/Users/harshalcarpenter/Laser Defender/Laser Defender/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>

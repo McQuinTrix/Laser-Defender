@@ -5,7 +5,7 @@
       <File FileName="Assets/Scripts/MusicPlayer.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/LevelManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/SpaceShipController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemySpawner.cs" Line="39" Column="24" />
+      <File FileName="Assets/Scripts/EnemySpawner.cs" Line="47" Column="24" />
       <File FileName="Assets/Scripts/Position.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

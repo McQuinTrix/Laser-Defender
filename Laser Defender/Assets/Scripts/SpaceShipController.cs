@@ -10,6 +10,10 @@ public class SpaceShipController : MonoBehaviour {
 	float xmin = 0.3f;
 	float xmax = 15.7f;
 
+	public GameObject projectile;
+	public float projectileSpeed;
+	public float repeatRate;
+
 	// Use this for initialization
 	void Start () {
 		float distance = transform.position.z - Camera.main.transform.position.z;
@@ -24,6 +28,13 @@ public class SpaceShipController : MonoBehaviour {
 		if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow)){
 			moveSpaceShip ();
 		}
+
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			InvokeRepeating ("Fire", 0.00001f, repeatRate);
+		}
+		if (Input.GetKeyUp (KeyCode.Space)) {
+			CancelInvoke ("Fire");
+		}
 	}
 
 	void moveSpaceShip(){
@@ -37,5 +48,11 @@ public class SpaceShipController : MonoBehaviour {
 
 		float newX = Mathf.Clamp (transform.position.x, xmin, xmax);
 		transform.position = new Vector3 (newX, transform.position.y, transform.position.z);
+	}
+
+	void Fire(){
+		GameObject beam = Instantiate (projectile, transform.position, Quaternion.identity) as GameObject;
+		Rigidbody2D rb = beam.GetComponent<Rigidbody2D> ();
+		rb.velocity = new Vector3 (0,projectileSpeed);
 	}
 }

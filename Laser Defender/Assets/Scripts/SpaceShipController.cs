@@ -9,6 +9,7 @@ public class SpaceShipController : MonoBehaviour {
 	float padding = 0.4f;
 	float xmin = 0.3f;
 	float xmax = 15.7f;
+	private float health = 1000f;
 
 	public GameObject projectile;
 	public float projectileSpeed;
@@ -54,5 +55,18 @@ public class SpaceShipController : MonoBehaviour {
 		GameObject beam = Instantiate (projectile, transform.position, Quaternion.identity) as GameObject;
 		Rigidbody2D rb = beam.GetComponent<Rigidbody2D> ();
 		rb.velocity = new Vector3 (0,projectileSpeed);
+	}
+
+	void OnTriggerEnter2D(Collider2D coll){
+		string tag = coll.gameObject.tag;
+		ProjectileScript obj = coll.gameObject.GetComponent<ProjectileScript>();
+		Debug.Log (health);
+		if (tag == "enemylaser") {
+			health -= obj.GetDamage ();
+			obj.Hit ();
+			if (health <= 0) {
+				Destroy (gameObject);
+			}
+		}
 	}
 }

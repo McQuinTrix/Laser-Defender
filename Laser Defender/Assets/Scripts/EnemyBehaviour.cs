@@ -6,14 +6,14 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	public float health = 1000f;
 	public GameObject projectile;
-	public SpaceShipController ss;
+	private SpaceShipController ss;
 	public float projectileSpeed;
 	public float repeatRate;
+	public float shotsPerSeconds = 0.5f;
 
 	void OnTriggerEnter2D(Collider2D coll){
 		string tag = coll.gameObject.tag;
 		ProjectileScript obj = coll.gameObject.GetComponent<ProjectileScript>();
-		Debug.Log (coll);
 		if (tag == "laser") {
 			health -= obj.GetDamage ();
 			obj.Hit ();
@@ -29,7 +29,11 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		InvokeRepeating ("Fire", (float)Random.Range (0, 1) , repeatRate);
+		float probablity = Time.deltaTime * shotsPerSeconds;
+		if (Random.value < probablity) {
+			Fire ();
+		}
+		//InvokeRepeating ("Fire", (float)Random.Range (0, 1) , repeatRate);
 	}
 	void Fire(){
 		GameObject beam = Instantiate (projectile, transform.position, Quaternion.identity) as GameObject;

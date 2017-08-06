@@ -64,7 +64,7 @@ public class SpaceShipController : MonoBehaviour {
 		if (tag == "enemylaser") {
 			health -= obj.GetDamage ();
 			obj.Hit ();
-			if (health <= 0) {
+			if (health <= 0) { 
 				Destroy (gameObject);
 			}
 		}

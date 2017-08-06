@@ -19,6 +19,10 @@ public class EnemySpawner : MonoBehaviour {
 		Vector3 rightEdge = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, distanceToCamera));
 		xMax = rightEdge.x;
 		xMin = leftEdge.x;
+		EnemyFormation ();
+	}
+
+	void EnemyFormation(){
 		foreach (Transform child in transform) {
 			GameObject enemy = Instantiate (enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
 			enemy.transform.parent = child;
@@ -46,5 +50,20 @@ public class EnemySpawner : MonoBehaviour {
 		} else if (rightEdgeOfFormation > xMax) {
 			movingRight = false;
 		}
+
+		//Enemies dead checker
+		if(AllEnemiesDead()){
+			Debug.Log ("Level Change");
+			EnemyFormation ();
+		}
+	}
+
+	bool AllEnemiesDead(){
+		foreach (Transform childPositionGameObject in transform) {
+			if (childPositionGameObject.childCount > 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

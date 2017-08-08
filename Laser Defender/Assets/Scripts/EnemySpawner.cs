@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour {
 	public float width = 10f;
 	public float height = 5f;
 	public float speed = 5f;
+	public float spawnDelay = 0.5f;
 
 	private bool movingRight = true;
 	private float xMax;
@@ -19,13 +20,24 @@ public class EnemySpawner : MonoBehaviour {
 		Vector3 rightEdge = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, distanceToCamera));
 		xMax = rightEdge.x;
 		xMin = leftEdge.x;
-		EnemyFormation ();
+		SpawnUntilFull ();
 	}
 
 	void EnemyFormation(){
 		foreach (Transform child in transform) {
 			GameObject enemy = Instantiate (enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
 			enemy.transform.parent = child;
+		}
+	}
+
+	void SpawnUntilFull(){
+		Transform freePos = nextFreePos ();
+		if (freePos) {
+			GameObject enemy = Instantiate (enemyPrefab, freePos.position, Quaternion.identity) as GameObject;
+			enemy.transform.parent = freePos;
+		}
+		if (nextFreePos ()) {
+			Invoke ("SpawnUntilFull", spawnDelay);
 		}
 	}
 
@@ -53,9 +65,18 @@ public class EnemySpawner : MonoBehaviour {
 
 		//Enemies dead checker
 		if(AllEnemiesDead()){
-			Debug.Log ("Level Change");
-			EnemyFormation ();
+			SpawnUntilFull ();
 		}
+	}
+
+	Transform nextFreePos(){
+		foreach (Transform childPositionGameObject in transform) {
+			if (childPositionGameObject.childCount == 0) {
+				return childPositionGameObject;
+			}
+		}
+
+		return null;
 	}
 
 	bool AllEnemiesDead(){

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2129f7223bb354836bb83dfd26a2e04e
+timeCreated: 1502434092
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Better Together
+  fontNames:
+  - Better Together
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

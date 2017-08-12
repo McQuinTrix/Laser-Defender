@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2129f7223bb354836bb83dfd26a2e04e
-timeCreated: 1502434092
+guid: 74969617c3a4f432b98c6037c5ff227a
+timeCreated: 1502435395
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Better Together
+  fontName: Chocolate and Delight
   fontNames:
-  - Better Together
+  - Chocolate and Delight
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

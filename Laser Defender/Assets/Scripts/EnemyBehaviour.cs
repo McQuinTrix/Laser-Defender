@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour {
 
@@ -10,6 +11,13 @@ public class EnemyBehaviour : MonoBehaviour {
 	public float projectileSpeed;
 	public float repeatRate;
 	public float shotsPerSeconds = 0.5f;
+	public int scoreValue = 150;
+
+	public AudioClip hitAudio;
+	public AudioClip destroyAudio;
+	public AudioClip laser;
+
+	private ScoreScript score;
 
 	void OnTriggerEnter2D(Collider2D coll){
 		string tag = coll.gameObject.tag;
@@ -17,7 +25,10 @@ public class EnemyBehaviour : MonoBehaviour {
 		if (tag == "laser") {
 			health -= obj.GetDamage ();
 			obj.Hit ();
+			AudioSource.PlayClipAtPoint (hitAudio, transform.position);
 			if (health <= 0) {
+				AudioSource.PlayClipAtPoint (destroyAudio, transform.position);
+				score.Score(scoreValue);
 				Destroy (gameObject);
 			}
 		}
@@ -25,6 +36,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		score = GameObject.FindGameObjectWithTag ("scoreText").GetComponent<ScoreScript> ();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +48,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		//InvokeRepeating ("Fire", (float)Random.Range (0, 1) , repeatRate);
 	}
 	void Fire(){
+		AudioSource.PlayClipAtPoint (laser, transform.position);
 		GameObject beam = Instantiate (projectile, transform.position, Quaternion.identity) as GameObject;
 		Rigidbody2D rb = beam.GetComponent<Rigidbody2D> ();
 		rb.velocity = new Vector3 (0,-projectileSpeed);

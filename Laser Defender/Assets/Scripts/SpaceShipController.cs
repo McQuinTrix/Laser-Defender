@@ -14,6 +14,9 @@ public class SpaceShipController : MonoBehaviour {
 	public GameObject projectile;
 	public float projectileSpeed;
 	public float repeatRate;
+	public AudioClip hitAudio;
+	public AudioClip destroyAudio;
+	public AudioClip laser;
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +55,7 @@ public class SpaceShipController : MonoBehaviour {
 	}
 
 	void Fire(){
+		AudioSource.PlayClipAtPoint (laser, transform.position);
 		GameObject beam = Instantiate (projectile, transform.position, Quaternion.identity) as GameObject;
 		Rigidbody2D rb = beam.GetComponent<Rigidbody2D> ();
 		rb.velocity = new Vector3 (0,projectileSpeed);
@@ -64,7 +68,9 @@ public class SpaceShipController : MonoBehaviour {
 		if (tag == "enemylaser") {
 			health -= obj.GetDamage ();
 			obj.Hit ();
+			AudioSource.PlayClipAtPoint (hitAudio, transform.position);
 			if (health <= 0) { 
+				AudioSource.PlayClipAtPoint (destroyAudio, transform.position);
 				Destroy (gameObject);
 			}
 		}

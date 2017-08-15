@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour {
 
-	public int score = 0;
+	public static int score = 0;
 	private Text myText;
 
 	public void Score(int points){
@@ -13,9 +13,8 @@ public class ScoreScript : MonoBehaviour {
 		myText.text = score.ToString();
 	}
 
-	public void Reset(){
+	public static void Reset(){
 		score = 0;
-		myText.text = score.ToString();
 	}
 
 	// Use this for initialization

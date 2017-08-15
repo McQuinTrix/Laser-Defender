@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\ScoreScript.cs" />
      <Compile Include="Assets\Scripts\Shredder.cs" />
      <Compile Include="Assets\Scripts\SpaceShipController.cs" />
+     <Compile Include="Assets\Scripts\getScore.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/Users/harshalcarpenter/Laser Defender/Laser Defender/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

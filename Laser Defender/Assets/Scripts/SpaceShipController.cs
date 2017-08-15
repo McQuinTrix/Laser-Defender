@@ -70,9 +70,15 @@ public class SpaceShipController : MonoBehaviour {
 			obj.Hit ();
 			AudioSource.PlayClipAtPoint (hitAudio, transform.position);
 			if (health <= 0) { 
-				AudioSource.PlayClipAtPoint (destroyAudio, transform.position);
-				Destroy (gameObject);
+				Die ();
 			}
 		}
+	}
+
+	void Die(){
+		LevelManager level = GameObject.FindGameObjectWithTag("levelmanager").GetComponent<LevelManager> ();
+		level.LoadNextLevel ();
+		AudioSource.PlayClipAtPoint (destroyAudio, transform.position);
+		Destroy (gameObject);
 	}
 }
